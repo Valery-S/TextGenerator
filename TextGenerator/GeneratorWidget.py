@@ -84,7 +84,7 @@ class GeneratorWidget(QWidget):
 		try:
 			genT = generateText(self.inputTextEdit.toPlainText())
 			self.outputTextEdit.setText(genT)
-		except:
-			print("Ошибка генерации")
+		except Exception as ex:
+			print("Ошибка генерации", ex)
 		
 		

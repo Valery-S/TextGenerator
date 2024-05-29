@@ -18,10 +18,10 @@ class GeneratorWidget(QWidget):
 		pal = self.palette()
 		pal.setColor(QPalette.Normal,
 			     QPalette.Window,
-			     QColor("grey"))
+			     QColor("orange"))
 		pal.setColor(QPalette.Inactive,
 			     QPalette.Window,
-			     QColor("grey"))
+			     QColor("orange"))
 		self.setPalette(pal)
 		
 		#Перемещение окна в центр монитора
@@ -49,23 +49,22 @@ class GeneratorWidget(QWidget):
 		self.generateButton.setParent(self)
 		
 		#Размещение виджетов
-		self.intputTextLabel.move(100,30)
+		self.intputTextLabel.move(100,20)
 		self.inputTextEdit.move(100,50)
 		self.outputTextEdit.move(100,230)
-		self.outputTextLabel.move(100,210)
+		self.outputTextLabel.move(100,200)
 		self.generateButton.move(300,160)
 		
 		#Установка размеров
 		self.inputTextEdit.resize(600,100)
 		self.outputTextEdit.resize(600,200)
-		self.generateButton.resize(200,50)
+		self.generateButton.resize(200,40)
 		
 		#Установка шрифта
 		font=QFont()
 		font.setPointSize(15)
 		self.inputTextEdit.setFont(font)
 		self.outputTextEdit.setFont(font)
-		font.setPointSize(11)
 		self.intputTextLabel.setFont(font)
 		self.outputTextLabel.setFont(font)
 		self.generateButton.setFont(font)
@@ -82,5 +81,10 @@ class GeneratorWidget(QWidget):
 		
 	#Обработчик нажатия кнопки "Сгенерировать"
 	def generate(self):
-		genT = generateText(self.inputTextEdit.toPlainText())
-		self.outputTextEdit.setText(genT)
+		try:
+			genT = generateText(self.inputTextEdit.toPlainText())
+			self.outputTextEdit.setText(genT)
+		except:
+			print("Ошибка генерации")
+		
+		

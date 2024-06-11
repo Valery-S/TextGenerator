@@ -22,6 +22,7 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="database.py" />
     <Compile Include="GenerationFunctions.py" />
     <Compile Include="GeneratorWidget.py" />
     <Compile Include="main.py" />

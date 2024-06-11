@@ -1,16 +1,19 @@
-from transformers import GPT2LMHeadModel, GPT2Tokenizer
-
+from transformers import AutoTokenizer, AutoModelForCausalLM
 from database import DataBase
 
 db = DataBase()
 
+#from transformers import GPT2LMHeadModel, GPT2Tokenizer
 # Загрузите модель и токенизатор
-model_name = "sberbank-ai/rugpt3small_based_on_gpt2"
-tokenizer = GPT2Tokenizer.from_pretrained(model_name)
-model = GPT2LMHeadModel.from_pretrained(model_name)
+# model_name = "sberbank-ai/rugpt3small_based_on_gpt2"
+# tokenizer = GPT2Tokenizer.from_pretrained(model_name)
+# model = GPT2LMHeadModel.from_pretrained(model_name)
+
+tokenizer = AutoTokenizer.from_pretrained("facebook/xglm-2.9B")
+model = AutoModelForCausalLM.from_pretrained("facebook/xglm-2.9B")
 
 # Функция для генерации текста
-def generateText(prompt:str, max_length=150):
+def generateText(prompt:str, max_length=150, min_length=20):
     # Токенизация входного текста
     input_ids = tokenizer.encode(prompt, return_tensors='pt')
 
@@ -18,6 +21,7 @@ def generateText(prompt:str, max_length=150):
     output = model.generate(
         input_ids,
         max_length=max_length + len(prompt),
+        min_length=min_length + len(prompt),
         num_return_sequences=1,
         no_repeat_ngram_size=2,
         early_stopping=True,

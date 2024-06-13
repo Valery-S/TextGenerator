@@ -1,7 +1,5 @@
 import sqlite3
 
-
-
 class DataBase:
 
     _instance = None

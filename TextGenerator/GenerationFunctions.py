@@ -3,17 +3,12 @@ from database import DataBase
 
 db = DataBase()
 
-#from transformers import GPT2LMHeadModel, GPT2Tokenizer
-# Загрузите модель и токенизатор
-# model_name = "sberbank-ai/rugpt3small_based_on_gpt2"
-# tokenizer = GPT2Tokenizer.from_pretrained(model_name)
-# model = GPT2LMHeadModel.from_pretrained(model_name)
 
-tokenizer = AutoTokenizer.from_pretrained("facebook/xglm-2.9B")
-model = AutoModelForCausalLM.from_pretrained("facebook/xglm-2.9B")
+tokenizer = AutoTokenizer.from_pretrained("ai-forever/mGPT")
+model = AutoModelForCausalLM.from_pretrained("ai-forever/mGPT")
 
 # Функция для генерации текста
-def generateText(prompt:str, max_length=150, min_length=20):
+def generateText(prompt:str, max_length=100, min_length=20):
     # Токенизация входного текста
     input_ids = tokenizer.encode(prompt, return_tensors='pt')
 
@@ -40,4 +35,3 @@ def generateText(prompt:str, max_length=150, min_length=20):
 
 def saveToDB(prompt,generatedText):
     db.save_message(prompt, generatedText)
-    
